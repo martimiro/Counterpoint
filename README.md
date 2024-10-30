@@ -1,2 +1,2 @@
 # Counterpoint
-Randomly generated counterpoint
+Automatically generated counterpoint according to rules
