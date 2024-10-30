@@ -1,2 +1,2 @@
-# contrapunt
-Contrapunt generat d'una manera aleatoria
+# Counterpoint
+Randomly generated counterpoint
