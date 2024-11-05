@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import wave
 import numpy as np
 import os
@@ -20,7 +21,7 @@ window.title("Contrapunt a partir de un Cantus Firmus")
 window.geometry("1200x800")
 
 #Creem un canvas
-canvas = tk.Canvas(window, width=1200, height=800)
+canvas = tk.Canvas(window, width=0, height=0)
 canvas.pack()
 
 #Create a label
@@ -35,39 +36,54 @@ def get_notes(nota):
 #Fem que soni la llista
 def wav_list():
 
-    note_frequencies = [frequencies[note] for note in l_notes if note in frequencies]
+    if len(l_notes) == 0:
 
-    fs = 44100 
-    duration = 2.0  # Durada en segons
+        popup = tk.Toplevel(window)
+        popup.title("ERROR")
+        popup.geometry("300x150")
 
-    full_wave_data = np.array([], dtype=np.int16)
+        # Agregar una etiqueta a la ventana emergente
+        etiqueta = tk.Label(popup, text="Introdueix unes quantes notes per escoltar el teu Cantus")
+        etiqueta.pack(pady=10)
 
-    for frequency in note_frequencies:
-        t = np.linspace(0, duration, int(fs * duration), endpoint=False)
-        wave_data = (0.5 * 32767 * np.sin(2 * np.pi * frequency * t)).astype(np.int16)
-        full_wave_data = np.concatenate((full_wave_data, wave_data))
+        # Agregar un botón para cerrar la ventana
+        boton_cerrar = tk.Button(popup, text="Cerrar", command=popup.destroy)
+        boton_cerrar.pack(pady=5)
+
+    else:
+        note_frequencies = [frequencies[note] for note in l_notes if note in frequencies]
+
+        fs = 44100 
+        duration = 2.0  # Durada en segons
+
+        full_wave_data = np.array([], dtype=np.int16)
+
+        for frequency in note_frequencies:
+            t = np.linspace(0, duration, int(fs * duration), endpoint=False)
+            wave_data = (0.5 * 32767 * np.sin(2 * np.pi * frequency * t)).astype(np.int16)
+            full_wave_data = np.concatenate((full_wave_data, wave_data))
 
 
-    with wave.open("cantus.wav", "wb") as f:
-        f.setnchannels(1)
-        f.setsampwidth(2)
-        f.setframerate(fs)
-        f.writeframes(full_wave_data.tobytes())
+        with wave.open("cantus.wav", "wb") as f:
+            f.setnchannels(1)
+            f.setsampwidth(2)
+            f.setframerate(fs)
+            f.writeframes(full_wave_data.tobytes())
 
-    if platform.system() == "Windows":
-        os.system("start cantus.wav")
-    elif platform.system() == "Darwin":  # MacOS
-        os.system("open cantus.wav")
-    elif platform.system() == "Linux":
-        os.system("xdg-open cantus.wav")
+        if platform.system() == "Windows":
+            os.system("start cantus.wav")
+        elif platform.system() == "Darwin":  # MacOS
+            os.system("open cantus.wav")
+        elif platform.system() == "Linux":
+            os.system("xdg-open cantus.wav")
 
 #Botó per esborrar les notes
 remove_button = tk.Button(window, text = "Esborra el teu cantus", command=remove_notes)
-remove_button.pack(pady = 20)
+remove_button.pack(padx=10, pady=0, side=tk.LEFT)
 
 #Botó per fer play
 play_button = tk.Button(window, text=".wav amb el Cantus Firmus", command=wav_list)
-play_button.pack(pady=50)
+play_button.pack(padx=10, pady=0, side=tk.LEFT)
 
 #Creem les tecles blanques d'un piano
 for i in range(octaves):
