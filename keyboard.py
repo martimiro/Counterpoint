@@ -47,7 +47,7 @@ def wav_list():
         etiqueta.pack(pady=10)
 
         # Agregar un botón para cerrar la ventana
-        boton_cerrar = tk.Button(popup, text="Cerrar", command=popup.destroy)
+        boton_cerrar = tk.Button(popup, text="Tancar", command=popup.destroy)
         boton_cerrar.pack(pady=5)
 
     else:
@@ -70,6 +70,8 @@ def wav_list():
             f.setframerate(fs)
             f.writeframes(full_wave_data.tobytes())
 
+
+        #Portabilitat
         if platform.system() == "Windows":
             os.system("start cantus.wav")
         elif platform.system() == "Darwin":  # MacOS
