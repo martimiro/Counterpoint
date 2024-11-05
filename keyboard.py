@@ -24,8 +24,9 @@ canvas = tk.Canvas(window, width=1200, height=800)
 canvas.pack()
 
 #Create a label
-main_label = tk.Label(window, text="Teclat piano", font=("Arial", 20))
-main_label.pack(pady=20)
+
+def remove_notes():
+    l_notes.clear()
 
 #Afegim les notes a la llista buida
 def get_notes(nota):
@@ -54,15 +55,19 @@ def wav_list():
         f.writeframes(full_wave_data.tobytes())
 
     if platform.system() == "Windows":
-        os.system("start output.wav")
+        os.system("start cantus.wav")
     elif platform.system() == "Darwin":  # MacOS
-        os.system("open output.wav")
+        os.system("open cantus.wav")
     elif platform.system() == "Linux":
-        os.system("xdg-open output.wav")
+        os.system("xdg-open cantus.wav")
+
+#Botó per esborrar les notes
+remove_button = tk.Button(window, text = "Esborra el teu cantus", command=remove_notes)
+remove_button.pack(pady = 20)
 
 #Botó per fer play
 play_button = tk.Button(window, text=".wav amb el Cantus Firmus", command=wav_list)
-play_button.pack(pady=20)
+play_button.pack(pady=50)
 
 #Creem les tecles blanques d'un piano
 for i in range(octaves):
