@@ -1,11 +1,8 @@
 import tkinter as tk
-
 import wave
 import numpy as np
 import os
-
-
-
+import platform
 
 notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
 semi_notes = ["DO#\nREb", "RE#\nMIb", "FA#\nSOLb", "SOL#\nLAb", "LA#\nSIb"]
@@ -16,7 +13,6 @@ frequencies = {"DO": 261.63, "DO#\nREb": 277.18, "RE": 293.66, "RE#\nMIb": 311.1
 
 octaves = 2
 d_tecles_negres = 0
-
 
 #Creen la finestra
 window = tk.Tk()
@@ -57,7 +53,12 @@ def wav_list():
         f.setframerate(fs)
         f.writeframes(full_wave_data.tobytes())
 
-    os.system("cantus.wav")
+    if platform.system() == "Windows":
+        os.system("start output.wav")
+    elif platform.system() == "Darwin":  # MacOS
+        os.system("open output.wav")
+    elif platform.system() == "Linux":
+        os.system("xdg-open output.wav")
 
 #Botó per fer play
 play_button = tk.Button(window, text=".wav amb el Cantus Firmus", command=wav_list)
