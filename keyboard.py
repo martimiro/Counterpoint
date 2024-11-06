@@ -15,7 +15,7 @@ frequencies = {"DO": 261.63, "DO#\nREb": 277.18, "RE": 293.66, "RE#\nMIb": 311.1
 octaves = 2
 d_tecles_negres = 0
 
-#Creen la finestra
+#Creem la finestra
 window = tk.Tk()
 window.title("Contrapunt a partir de un Cantus Firmus")
 window.geometry("1200x800")
@@ -24,8 +24,7 @@ window.geometry("1200x800")
 canvas = tk.Canvas(window, width=0, height=0)
 canvas.pack()
 
-#Create a label
-
+#Esborrar la llista de notes
 def remove_notes():
     l_notes.clear()
 
@@ -42,11 +41,11 @@ def wav_list():
         popup.title("ERROR")
         popup.geometry("300x150")
 
-        # Agregar una etiqueta a la ventana emergente
+        # Afegir una etiqueta al pop-up
         etiqueta = tk.Label(popup, text="Introdueix unes quantes notes per escoltar el teu Cantus")
         etiqueta.pack(pady=10)
 
-        # Agregar un botón para cerrar la ventana
+        # Afegir un botón per tancar la finestra
         boton_cerrar = tk.Button(popup, text="Tancar", command=popup.destroy)
         boton_cerrar.pack(pady=5)
 
