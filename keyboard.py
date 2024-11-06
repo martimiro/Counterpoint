@@ -63,13 +63,11 @@ def wav_list():
             wave_data = (0.5 * 32767 * np.sin(2 * np.pi * frequency * t)).astype(np.int16)
             full_wave_data = np.concatenate((full_wave_data, wave_data))
 
-
         with wave.open("cantus.wav", "wb") as f:
             f.setnchannels(1)
             f.setsampwidth(2)
             f.setframerate(fs)
             f.writeframes(full_wave_data.tobytes())
-
 
         #Portabilitat
         if platform.system() == "Windows":
