@@ -4,6 +4,7 @@ import wave
 import numpy as np
 import os
 import platform
+import abjad
 
 notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
 semi_notes = ["DO#\nREb", "RE#\nMIb", "FA#\nSOLb", "SOL#\nLAb", "LA#\nSIb"]
@@ -54,7 +55,7 @@ def wav_list():
 
     else:
         
-        note_frequencies = [frequency for _, frequency in l_notes]
+        note_frequencies = [frequency for _, frequency in l_notes] # s'assigna a frequency i es recull a la nova llista
 
 
         fs = 44100 
