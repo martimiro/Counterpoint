@@ -27,22 +27,26 @@ canvas = tk.Canvas(window, width=0, height=0)
 canvas.pack()
 
 def crear_partitura():
-    #Creem un entorn per configurar Musescore
+    # Crear un entorno para configurar MuseScore
     env = environment.Environment()
     env['musescoreDirectPNGPath'] = 'C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe'
 
-    #Creem la partitura
+    # Crear la partitura
     score = stream.Score()
     part = stream.Part()
-    for note in l_notes:
-        part.append(note.Note('C4', quarterLength=4))
+    for note_tup in l_notes:  # Iterem sobre la llista de notes
+        note_name = note_tup[0]  # Agafem el nom de la nota
+        part.append(note.Note(note_name, quarterLength=4))  # Creem i afegim la nota
+
     score.append(part)
 
     # Guardar la partitura como MusicXML
     score.write('musicxml', fp='cantus.xml')
 
-    # Fem servir Musescore per convertir d'arxiu XML a PDF
+    # Usar MuseScore para convertir de XML a PDF
     subprocess.run(['C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe', 'cantus.xml', '-o', 'cantus.pdf'])
+
+    print("S'ha creat el pdf")
 
 #Esborrar la llista de notes
 def remove_notes():
@@ -107,6 +111,7 @@ play_button.pack(padx=10, pady=0, side=tk.LEFT)
 #Botó per generar partitures
 partitura_button = tk.Button(window, text = ".pdf amb la teva partitura", command=crear_partitura)
 partitura_button.pack(padx=10, pady=0, side=tk.LEFT)
+
 #Creem les tecles blanques d'un piano
 for i in range(octaves):
     for nota in notes:
