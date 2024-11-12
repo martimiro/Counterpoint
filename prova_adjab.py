@@ -1,16 +1,23 @@
-import abjad
+import subprocess
+from music21 import stream, note, environment
+
+# Crear un entorno para configurar el programa de visualización (MuseScore)
+env = environment.Environment()
+
+# Establecer el ejecutable de MuseScore (ajusta la ruta si es necesario)
+env['musescoreDirectPNGPath'] = 'C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe'  # Asegúrate de que esta ruta sea correcta
 
 # Crear una secuencia de notas
-notas = "c'4 d'4 e'4 f'4 g'4"
+score = stream.Score()
+part = stream.Part()
+part.append(note.Note('C4', quarterLength=1))
+part.append(note.Note('D4', quarterLength=1))
+part.append(note.Note('E4', quarterLength=1))
+score.append(part)
 
-# Convertir la secuencia de notas en una selección de contenedores de Abjad
-voice = abjad.Voice(notas)
+# Guardar la partitura como MusicXML
+score.write('musicxml', fp='output.xml')
 
-# Crear un pentagrama y añadir la voz de notas
-staff = abjad.Staff([voice])
-
-# Crear una partitura y añadir el pentagrama
-score = abjad.Score([staff])
-
-# Crear la partitura en formato LilyPond y guardarla como un archivo PDF
-abjad.show(score)
+# Usar MuseScore para convertir el archivo MusicXML a PDF
+# Ejecutar el comando MuseScore desde Python
+subprocess.run(['C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe', 'output.xml', '-o', 'output.pdf'])

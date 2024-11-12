@@ -4,7 +4,8 @@ import wave
 import numpy as np
 import os
 import platform
-import abjad
+import subprocess
+from music21 import stream, note, environment
 
 notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
 semi_notes = ["DO#\nREb", "RE#\nMIb", "FA#\nSOLb", "SOL#\nLAb", "LA#\nSIb"]
@@ -25,6 +26,24 @@ window.geometry("1200x800")
 canvas = tk.Canvas(window, width=0, height=0)
 canvas.pack()
 
+def crear_partitura():
+    #Creem un entorn per configurar Musescore
+    env = environment.Environment()
+    env['musescoreDirectPNGPath'] = 'C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe'
+
+    #Creem la partitura
+    score = stream.Score()
+    part = stream.Part()
+    for note in l_notes:
+        part.append(note.Note('C4', quarterLength=4))
+    score.append(part)
+
+    # Guardar la partitura como MusicXML
+    score.write('musicxml', fp='cantus.xml')
+
+    # Fem servir Musescore per convertir d'arxiu XML a PDF
+    subprocess.run(['C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe', 'cantus.xml', '-o', 'cantus.pdf'])
+
 #Esborrar la llista de notes
 def remove_notes():
     l_notes.clear()
@@ -38,7 +57,6 @@ def get_notes(nota, octave = 1):
 
 #Fem que soni la llista
 def wav_list():
-
     if len(l_notes) == 0:
 
         popup = tk.Toplevel(window)
@@ -54,13 +72,9 @@ def wav_list():
         boton_cerrar.pack(pady=5)
 
     else:
-        
         note_frequencies = [frequency for _, frequency in l_notes] # s'assigna a frequency i es recull a la nova llista
-
-
         fs = 44100 
         duration = 2.0  # Durada en segons
-
         full_wave_data = np.array([], dtype=np.int16)
 
         for frequency in note_frequencies:
@@ -90,6 +104,9 @@ remove_button.pack(padx=10, pady=0, side=tk.LEFT)
 play_button = tk.Button(window, text=".wav amb el Cantus Firmus", command=wav_list)
 play_button.pack(padx=10, pady=0, side=tk.LEFT)
 
+#Botó per generar partitures
+partitura_button = tk.Button(window, text = ".pdf amb la teva partitura", command=crear_partitura)
+partitura_button.pack(padx=10, pady=0, side=tk.LEFT)
 #Creem les tecles blanques d'un piano
 for i in range(octaves):
     for nota in notes:
@@ -102,7 +119,6 @@ for z in range(octaves):
         octave = z + 1
 
         for semi_nota in semi_notes:
-            
             if semi_nota != semi_notes[1] and semi_nota != semi_notes[4]:
                 black_button = tk.Button(canvas, text=semi_nota, height=50, width=20, bg="black", fg="white", command=lambda nota=semi_nota, octave=octave: get_notes(nota, octave))
                 black_button.place(x = 50 + d_tecles_negres, y = 20, width = 38, height = 200)
