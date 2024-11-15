@@ -11,8 +11,13 @@ notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
 semi_notes = ["DO#\nREb", "RE#\nMIb", "FA#\nSOLb", "SOL#\nLAb", "LA#\nSIb"]
 l_notes = []
 
-frequencies = {"DO": 130.813, "DO#\nREb": 138.591, "RE": 146.832, "RE#\nMIb": 155.563, "MI": 164.814, "FA": 174.614, "FA#\nSOLb": 184.997, "SOL": 195.998,
-              "SOL#\nLAb": 207.652, "LA": 220.000, "LA#\nSIb": 233.082, "SI": 246.942}
+frequencies = {"DO": 261.626, "DO#\nREb": 277.183, "RE": 293.665, "RE#\nMIb": 311.127, "MI": 329.628, "FA": 349.228, "FA#\nSOLb": 369.994, 
+               "SOL": 391.995, "SOL#\nLAb": 415.305, "LA": 440, "LA#\nSIb": 466.164, "SI": 493.883}
+
+note_mapping = {
+    "DO": "C", "RE": "D", "MI": "E", "FA": "F", "SOL": "G", "LA": "A", "SI": "B", "DO#\nREb": "C#", "RE#\nMIb": "D#", "FA#\nSOLb": "F#",
+    "SOL#\nLAb": "G#", "LA#\nSIb": "A#"
+}
 
 octaves = 2
 d_tecles_negres = 0
@@ -27,23 +32,24 @@ canvas = tk.Canvas(window, width=0, height=0)
 canvas.pack()
 
 def crear_partitura():
-    # Crear un entorno para configurar MuseScore
+    # Creem un entorn per configurar Musescore
     env = environment.Environment()
     env['musescoreDirectPNGPath'] = 'C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe'
 
-    # Crear la partitura
     score = stream.Score()
     part = stream.Part()
-    for note_tup in l_notes:  # Iterem sobre la llista de notes
-        note_name = note_tup[0]  # Agafem el nom de la nota
-        part.append(note.Note(note_name, quarterLength=4))  # Creem i afegim la nota
 
+    for note_tup in l_notes:
+        note_name = note_tup[0]
+        if note_name in note_mapping:
+            note_name = note_mapping[note_name]  # Mapea el nombre de la nota
+            part.append(note.Note(note_name, quarterLength=4))
     score.append(part)
 
-    # Guardar la partitura como MusicXML
+    # Guardem la partitura com MusicXML
     score.write('musicxml', fp='cantus.xml')
 
-    # Usar MuseScore para convertir de XML a PDF
+    # Fem servir Musescore4 per passar de .xml a .pdf
     subprocess.run(['C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe', 'cantus.xml', '-o', 'cantus.pdf'])
 
     print("S'ha creat el pdf")
