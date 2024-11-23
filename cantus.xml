@@ -5,7 +5,7 @@
   <identification>
     <creator type="composer">Music21</creator>
     <encoding>
-      <encoding-date>2024-11-15</encoding-date>
+      <encoding-date>2024-11-23</encoding-date>
       <software>music21 v.9.3.0</software>
     </encoding>
   </identification>
@@ -16,12 +16,12 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="P20bffc9b69de5fe1afd6302c1fb9306d">
+    <score-part id="P39a46c4f3f21ee0842db9b0a638a9e35">
       <part-name />
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="P20bffc9b69de5fe1afd6302c1fb9306d">
+  <part id="P39a46c4f3f21ee0842db9b0a638a9e35">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -38,10 +38,12 @@
       <note>
         <pitch>
           <step>A</step>
+          <alter>1</alter>
           <octave>4</octave>
         </pitch>
         <duration>40320</duration>
         <type>whole</type>
+        <accidental>sharp</accidental>
       </note>
     </measure>
     <!--========================= Measure 2 ==========================-->
@@ -81,11 +83,13 @@
     <measure implicit="no" number="5">
       <note>
         <pitch>
-          <step>F</step>
+          <step>D</step>
+          <alter>1</alter>
           <octave>4</octave>
         </pitch>
         <duration>40320</duration>
         <type>whole</type>
+        <accidental>sharp</accidental>
       </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

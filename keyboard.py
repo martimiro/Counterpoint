@@ -11,8 +11,10 @@ notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
 semi_notes = ["DO#\nREb", "RE#\nMIb", "FA#\nSOLb", "SOL#\nLAb", "LA#\nSIb"]
 l_notes = []
 
-frequencies = {"DO": 261.626, "DO#\nREb": 277.183, "RE": 293.665, "RE#\nMIb": 311.127, "MI": 329.628, "FA": 349.228, "FA#\nSOLb": 369.994, 
-               "SOL": 391.995, "SOL#\nLAb": 415.305, "LA": 440, "LA#\nSIb": 466.164, "SI": 493.883}
+frequencies = {
+    "DO": 261.626, "DO#\nREb": 277.183, "RE": 293.665, "RE#\nMIb": 311.127, "MI": 329.628, "FA": 349.228, "FA#\nSOLb": 369.994, 
+    "SOL": 391.995, "SOL#\nLAb": 415.305, "LA": 440, "LA#\nSIb": 466.164, "SI": 493.883
+}
 
 note_mapping = {
     "DO": "C", "RE": "D", "MI": "E", "FA": "F", "SOL": "G", "LA": "A", "SI": "B", "DO#\nREb": "C#", "RE#\nMIb": "D#", "FA#\nSOLb": "F#",
@@ -138,7 +140,7 @@ for z in range(octaves):
             #Espai entre Mi i Fa / Si i Do
             else:
                 black_button = tk.Button(canvas, text=semi_nota, height=50, width=20, bg="black", fg="white", 
-                         command=lambda nota=semi_nota, octave=octave: get_notes(nota, octave))
+                        command=lambda nota=semi_nota, octave=octave: get_notes(nota, octave))
                 black_button.place(x = 50 + d_tecles_negres, y = 20, width = 38, height = 200)
                 d_tecles_negres = d_tecles_negres + 130
 
