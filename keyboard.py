@@ -1,11 +1,10 @@
 import tkinter as tk
-from tkinter import messagebox
 import wave
 import numpy as np
 import os
 import platform
 import subprocess
-from music21 import stream, note, environment
+from music21 import stream, note, environment, metadata
 
 notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
 semi_notes = ["DO#\nREb", "RE#\nMIb", "FA#\nSOLb", "SOL#\nLAb", "LA#\nSIb"]
@@ -34,27 +33,47 @@ canvas = tk.Canvas(window, width=0, height=0)
 canvas.pack()
 
 def crear_partitura():
-    # Creem un entorn per configurar Musescore
-    env = environment.Environment()
-    env['musescoreDirectPNGPath'] = 'C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe'
+    if len(l_notes) == 0:
+        popup = tk.Toplevel(window)
+        popup.title("ERROR")
+        popup.geometry("300x150")
 
-    score = stream.Score()
-    part = stream.Part()
+        # Afegir una etiqueta al pop-up
+        etiqueta = tk.Label(popup, text="Introdueix unes quantes notes per veure el teu .pdf")
+        etiqueta.pack(pady=10)
 
-    for note_tup in l_notes:
-        note_name = note_tup[0]
-        if note_name in note_mapping:
-            note_name = note_mapping[note_name]  # Mapea el nombre de la nota
-            part.append(note.Note(note_name, quarterLength=4))
-    score.append(part)
+        # Afegir un botón per tancar la finestra
+        close_button = tk.Button(popup, text="Tancar", command=popup.destroy)
+        close_button.pack(pady=5)
 
-    # Guardem la partitura com MusicXML
-    score.write('musicxml', fp='cantus.xml')
+    else:
+        # Creem un entorn per configurar Musescore
+        env = environment.Environment()
+        env['musescoreDirectPNGPath'] = 'C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe'
 
-    # Fem servir Musescore4 per passar de .xml a .pdf
-    subprocess.run(['C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe', 'cantus.xml', '-o', 'cantus.pdf'])
+        score = stream.Score()
+        part = stream.Part()
+        measure = stream.Measure()
+        metadata = metadata.Metadata()
 
-    print("S'ha creat el pdf")
+        measure.append(note.Note())
+        part.append(measure)
+        score.insert(0, metadata.Metadata())
+        score.metadata.title = "Contrapunt 1:1"
+        score.show()
+
+        for note_tup in l_notes:
+            note_name = note_tup[0]
+            if note_name in note_mapping:
+                note_name = note_mapping[note_name]  # Mapea el nombre de la nota
+                part.append(note.Note(note_name, quarterLength=4))
+        score.append(part)
+
+        # Guardem la partitura com MusicXML
+        score.write('musicxml', fp='cantus.xml')
+
+        # Fem servir Musescore4 per passar de .xml a .pdf
+        subprocess.run(['C:\\Program Files\\MuseScore 4\\bin\\MuseScore4.exe', 'cantus.xml', '-o', 'cantus.pdf'])
 
 #Esborrar la llista de notes
 def remove_notes():
@@ -80,8 +99,8 @@ def wav_list():
         etiqueta.pack(pady=10)
 
         # Afegir un botón per tancar la finestra
-        boton_cerrar = tk.Button(popup, text="Tancar", command=popup.destroy)
-        boton_cerrar.pack(pady=5)
+        close_button = tk.Button(popup, text="Tancar", command=popup.destroy)
+        close_button.pack(pady=5)
 
     else:
         note_frequencies = [frequency for _, frequency in l_notes] # s'assigna a frequency i es recull a la nova llista
