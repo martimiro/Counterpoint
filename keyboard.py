@@ -53,14 +53,10 @@ def crear_partitura():
 
         score = stream.Score()
         part = stream.Part()
-        measure = stream.Measure()
-        metadata = metadata.Metadata()
 
-        measure.append(note.Note())
-        part.append(measure)
         score.insert(0, metadata.Metadata())
-        score.metadata.title = "Contrapunt 1:1"
-        score.show()
+        score.metadata.title = 'Contrapunt 1:1'
+        score.metadata.composer = ' '
 
         for note_tup in l_notes:
             note_name = note_tup[0]
