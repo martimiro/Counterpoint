@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE score-partwise  PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
-  <movement-title>Music21 Fragment</movement-title>
+  <work>
+    <work-title>Contrapunt 1:1</work-title>
+  </work>
+  <movement-title>Contrapunt 1:1</movement-title>
   <identification>
-    <creator type="composer">Music21</creator>
+    <creator type="composer"> </creator>
     <encoding>
-      <encoding-date>2024-11-25</encoding-date>
+      <encoding-date>2024-11-29</encoding-date>
       <software>music21 v.9.3.0</software>
     </encoding>
   </identification>
@@ -16,12 +19,12 @@
     </scaling>
   </defaults>
   <part-list>
-    <score-part id="Pc6ec1bd6b41ebcbd74a753fab84c4c04">
+    <score-part id="P816906621a25163180e2f9ed211f30f6">
       <part-name />
     </score-part>
   </part-list>
   <!--=========================== Part 1 ===========================-->
-  <part id="Pc6ec1bd6b41ebcbd74a753fab84c4c04">
+  <part id="P816906621a25163180e2f9ed211f30f6">
     <!--========================= Measure 1 ==========================-->
     <measure implicit="no" number="1">
       <attributes>
@@ -37,7 +40,7 @@
       </attributes>
       <note>
         <pitch>
-          <step>A</step>
+          <step>D</step>
           <octave>4</octave>
         </pitch>
         <duration>40320</duration>
@@ -48,7 +51,7 @@
     <measure implicit="no" number="2">
       <note>
         <pitch>
-          <step>A</step>
+          <step>D</step>
           <octave>4</octave>
         </pitch>
         <duration>40320</duration>
@@ -59,7 +62,7 @@
     <measure implicit="no" number="3">
       <note>
         <pitch>
-          <step>A</step>
+          <step>D</step>
           <octave>4</octave>
         </pitch>
         <duration>40320</duration>
@@ -70,7 +73,7 @@
     <measure implicit="no" number="4">
       <note>
         <pitch>
-          <step>A</step>
+          <step>D</step>
           <octave>4</octave>
         </pitch>
         <duration>40320</duration>
@@ -81,66 +84,13 @@
     <measure implicit="no" number="5">
       <note>
         <pitch>
-          <step>A</step>
+          <step>D</step>
+          <alter>1</alter>
           <octave>4</octave>
         </pitch>
         <duration>40320</duration>
         <type>whole</type>
-      </note>
-    </measure>
-    <!--========================= Measure 6 ==========================-->
-    <measure implicit="no" number="6">
-      <note>
-        <pitch>
-          <step>A</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>40320</duration>
-        <type>whole</type>
-      </note>
-    </measure>
-    <!--========================= Measure 7 ==========================-->
-    <measure implicit="no" number="7">
-      <note>
-        <pitch>
-          <step>C</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>40320</duration>
-        <type>whole</type>
-      </note>
-    </measure>
-    <!--========================= Measure 8 ==========================-->
-    <measure implicit="no" number="8">
-      <note>
-        <pitch>
-          <step>C</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>40320</duration>
-        <type>whole</type>
-      </note>
-    </measure>
-    <!--========================= Measure 9 ==========================-->
-    <measure implicit="no" number="9">
-      <note>
-        <pitch>
-          <step>C</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>40320</duration>
-        <type>whole</type>
-      </note>
-    </measure>
-    <!--========================= Measure 10 =========================-->
-    <measure implicit="no" number="10">
-      <note>
-        <pitch>
-          <step>C</step>
-          <octave>4</octave>
-        </pitch>
-        <duration>40320</duration>
-        <type>whole</type>
+        <accidental>sharp</accidental>
       </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>
