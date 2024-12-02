@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 import wave
 import numpy as np
 import os
@@ -33,6 +32,14 @@ def teclat():
     #Creem un canvas
     canvas = tk.Canvas(window, width=0, height=0)
     canvas.pack()
+
+    # #Canvair alteracions a bemol
+    def bemol():
+        print("funcio en desenvolupament")
+
+    #Canviar alteracions a sostingut
+    def sostingut():
+        print("funcio en desenvolupament")
 
     def crear_partitura():
         if len(l_notes) == 0:
@@ -125,16 +132,13 @@ def teclat():
             elif platform.system() == "Linux":
                 os.system("xdg-open cantus.wav")
 
-    def sortir():
-    #Messagebox per confirmar que surti
-        exit = messagebox.askyesno(title="Sortir", message="Està segur que vol sortir?")
+    #Botó per fer bemols
+    bemol_button = tk.Button(window, text = "Bemol", command = bemol)
+    bemol_button.pack(padx=10, pady=0, side=tk.LEFT)
 
-        if exit == True:
-            window.destroy()
-
-    #Botó per sortir de la finestra
-    quit_button = tk.Button(window, text="Sortir", command=sortir)
-    quit_button.pack(padx = 10, pady = 0, side = tk.LEFT)
+    #Botó per fer sostinguts
+    sostingut_button = tk.Button(window, text= "Sostingut", command= sostingut)
+    sostingut_button.pack(padx=10, pady=0, side= tk.LEFT)
 
     #Botó per esborrar les notes
     remove_button = tk.Button(window, text = "Esborra el teu cantus", command=remove_notes)
