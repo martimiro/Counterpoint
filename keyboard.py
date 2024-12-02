@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 import wave
 import numpy as np
 import os
@@ -6,7 +7,7 @@ import platform
 import subprocess
 from music21 import stream, note, environment, metadata
 
-def contrapunt1_1():
+def teclat():
     notes = ["DO", "RE", "MI", "FA", "SOL", "LA", "SI"]
     semi_notes = ["DO#\nREb", "RE#\nMIb", "FA#\nSOLb", "SOL#\nLAb", "LA#\nSIb"]
     l_notes = []
@@ -123,6 +124,17 @@ def contrapunt1_1():
                 os.system("open cantus.wav")
             elif platform.system() == "Linux":
                 os.system("xdg-open cantus.wav")
+
+    def sortir():
+    #Messagebox per confirmar que surti
+        exit = messagebox.askyesno(title="Sortir", message="Està segur que vol sortir?")
+
+        if exit == True:
+            window.destroy()
+
+    #Botó per sortir de la finestra
+    quit_button = tk.Button(window, text="Sortir", command=sortir)
+    quit_button.pack(padx = 10, pady = 0, side = tk.LEFT)
 
     #Botó per esborrar les notes
     remove_button = tk.Button(window, text = "Esborra el teu cantus", command=remove_notes)

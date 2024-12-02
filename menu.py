@@ -18,15 +18,12 @@ def sortir():
     if exit == True:
         window.destroy()
 
-#Obrim la finestra del Contrapunt 1:1
-
-
 #Creem el botó per sortir
 quit_button = tk.Button(window, text="Sortir", command=sortir)
 quit_button.pack(padx = 10, pady = 0, side = tk.LEFT)
 
 #Creem el botó per anar a la finestra del contrapunt 1:!
-contrapunt_1 = tk.Button(window, text = "Contrapunt 1:1", command = keyboard.contrapunt1_1)
+contrapunt_1 = tk.Button(window, text = "Contrapunt 1:1", command = keyboard.teclat)
 contrapunt_1.pack(padx  =10, pady = 0, side = tk.LEFT)
 
 window.mainloop()
